@@ -121,6 +121,5 @@ TEST_CASE("Copy constructor")
 
     map1.insert(5, 50);
 
-    /* TODO: Make this work. */
-    // Bst_map map2(map1);
+    Bst_map map2(map1);
 }

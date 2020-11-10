@@ -10,15 +10,38 @@ Bst_map::Bst_map()
 
 
 Bst_map::Bst_map(Bst_map const& other)
-        : Bst_map()  // << TODO fix this
+        : size_(other.size_)
+        , root_(copy_nodes_(other.root_))
 { }
 
-
+Bst_map::node_ptr Bst_map::copy_nodes_(Bst_map::node_ptr other)
+{
+    if(other) {
+        return new Node_{other->key,
+                         other->value,
+                         copy_nodes_(other->left),
+                         copy_nodes_(other->right)};
+    }
+    return nullptr;
+}
 Bst_map& Bst_map::operator=(Bst_map const& other)
 {
-    // TODO complete this
-
+    size_ = other.size_;
+    if(this != &other) {
+        delete_nodes_(root_);
+        root_ = copy_nodes_(other.root_);
+    }
     return *this;
+}
+
+void  Bst_map:: delete_nodes_(Bst_map::node_ptr pNode)
+{
+    if(pNode)
+    {
+        delete_nodes_(pNode->left);
+        delete_nodes_(pNode->right);
+        delete pNode;
+    }
 }
 
 

@@ -40,7 +40,12 @@ private:
 
     std::size_t size_;
     node_ptr    root_;
+
+   static node_ptr copy_nodes_(node_ptr other);
+   static void  delete_nodes_(Bst_map::Node_ *pNode);
 };
+
+
 
 struct Bst_map::Node_
 {
